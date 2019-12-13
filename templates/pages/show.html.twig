@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8">
+
+        </div>
+        <div class="col-md-4">
+            <h1>{{ post.title }}</h1>
+            <h2>{{ post.dpt }}</h2>
+            <h2>{{ post.city }} ({{ post.postal }})</h2>
+            <h2>Posté dans la categorie : {{ post.categoryType }}</h2>
+            <h2>Quantité disponible : {{ post.quantity }}</h2>
+            <h2>Prix unitaire : {{ post.price }}</h2>
+            <a href="#" class="btn btn-primary">Contacter l'annonceur</a>
+        </div>
+    </div>
+    <p>
+        {{ post.description | nl2br }}
+    </p>
+    <div class="row">
+        <div class="col-md-8">
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

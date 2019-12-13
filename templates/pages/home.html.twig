@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="jumbotron text-center">
+    <h1>La foire aux plantes</h1>
+</div>
+
+<div class="container">
+    <p><div class="50">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas dignissimos eum impedit. Accusantium illum deleniti hic rerum quae minus. Ab quia quae neque libero culpa iusto doloremque hic velit impedit.</div></p>
+</div>
+
+<div class="container">
+    <h2>Les dernières annonces mises en ligne</h2>
+    <div class="row flex">
+        {% for post in posts %}
+            <div class="col-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="{{ path('post.show', {id: post.id}) }}">{{ post.title }}</a>
+                        </h5>
+                        <p class="card-text">{{ post.dpt }}</p>
+                        <p class="card-text">{{ post.city }} ({{ post.postal }})</p>
+                        <div class="text-primary">{{ post.price }} €</div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
