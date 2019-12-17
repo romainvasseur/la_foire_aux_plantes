@@ -20,8 +20,9 @@
                         <h5 class="card-title">
                             <a href="{{ path('post.show', {id: post.id}) }}">{{ post.title }}</a>
                         </h5>
-                        <p class="card-text">{{ post.dpt }}</p>
-                        <p class="card-text">{{ post.city }} ({{ post.postal }})</p>
+                        <p class="card-text">{{ post.city }} | {{ post.departement}} | ({{ post.postal }})</p>
+                        <p class="card-text">{{ post.categoryType }}</p>
+                        <p class="card-text">{{ post.postNameType }}</p>
                         <div class="text-primary">{{ post.price }} €</div>
                     </div>
                 </div>

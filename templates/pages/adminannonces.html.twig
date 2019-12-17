@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="jumbotron text-center">
+    <h1>Gérer les annonces</h1>
+</div>
+
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
+
+ <div class="container mt-4">
+     <table class="table table-stripped">
+         <thead>
+             <tr>
+                 <th>Titre</th>
+                 <th>Actions</th>
+             </tr>
+         </thead>
+         <tbody>
+            {% for post in posts %}
+             <tr>
+                 <td>{{ post.title }}</td>
+                 <td>
+                    <a href="{{ path('admin.post.edit', {id: post.id}) }}" class="btn btn-primary">Éditer</a>
+                 </td>
+                 <td>
+                    <form method="POST" action="{{ path('admin.post.delete', {id: post.id}) }}" onsubmit="return confirm('êtes vous sûr ?')">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ post.id) }}">
+                        <button class="btn btn-danger">Supprimer</button>
+                    </form>
+                 </td>
+             </tr>
+             {% endfor %}
+         </tbody>
+     </table>
+     <a href="{{ path('admin.new') }}" class="btn btn-primary">Nouvelle annonce</a>
+ </div>       
+
+ 
+            
+ 
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="jumbotron text-center">
+    <h1>Editer l'annonce</h1>
+</div>
+
+<div class="container">
+    {{ form_start(form) }}
+        <div class="row">
+            <div class="col-md-3">{{ form_row(form.title) }}</div>
+            <div class="col-md-2">{{ form_row(form.category) }}</div>
+            <div class="col-md-2">{{ form_row(form.posttype) }}</div>
+            <div class="col-md-2">{{ form_row(form.price) }}</div>
+            <div class="col-md-3">{{ form_row(form.quantity) }}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-5">{{ form_row(form.dpt) }}</div>
+            <div class="col-md-5">{{ form_row(form.city) }}</div>
+            <div class="col-md-2">{{ form_row(form.postal) }}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">{{ form_row(form.description) }}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-1">
+                <button class="btn btn-primary">Éditer</button>
+            </div>
+        </div>
+    {{ form_end(form) }}
+</div>
+
+{% endblock %}
