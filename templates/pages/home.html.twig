@@ -1,34 +1,67 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
-<div class="jumbotron text-center">
-    <h1>La foire aux plantes</h1>
+<div class="jumbotron container">
+  <h2 style="text-align:center;">La foire aux plantes</h2>
 </div>
-
-<div class="container">
-    <p><div class="50">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas dignissimos eum impedit. Accusantium illum deleniti hic rerum quae minus. Ab quia quae neque libero culpa iusto doloremque hic velit impedit.</div></p>
-</div>
-
-<div class="container">
-    <h2>Les dernières annonces mises en ligne</h2>
-    <div class="row flex">
-        {% for post in posts %}
-            <div class="col-3">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <a href="{{ path('post.show', {id: post.id}) }}">{{ post.title }}</a>
-                        </h5>
-                        <p class="card-text">{{ post.city }} | {{ post.departement}} | ({{ post.postal }})</p>
-                        <p class="card-text">{{ post.categoryType }}</p>
-                        <p class="card-text">{{ post.postNameType }}</p>
-                        <div class="text-primary">{{ post.price }} €</div>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
     </div>
+{% endfor %}
+<div class="container bg-light rounded flex" style="padding: 30px;">
+  <div class="row">
+  <div class="col-md-5">
+    <h3>Un titre engageant</h3>
+    <p>Un premier paragraphe qui explique ce que le site fait etc Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
+      Repudiandae ad aspernatur et vel fugit debitis, quis maxime odio quisquam explicabo adipisci tenetur, incidunt perspiciatis corrupti, nulla eaque molestiae facere eum.</p>
+    <p>Un deuxieme paragraphe qui explique les règles à suivre ainsi que les projets futurs Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae ad aspernatur et
+       vel fugit debitis, quis maxime odio quisquam explicabo adipisci tenetur, incidunt perspiciatis corrupti, nulla eaque molestiae facere eum. Lorem ipsum, dolor sit amet consectetur 
+       adipisicing elit. Repudiandae ad aspernatur et vel fugit debitis, quis maxime odio quisquam explicabo adipisci tenetur, incidunt perspiciatis corrupti, nulla eaque molestiae facere eum.</p>
+    <p> Un dernier paragraphe pour souhaiter la bonne journée Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur ex architecto laborum. Eligendi in est commodi 
+      itaque sed? Veniam, reprehenderit aperiam voluptatibus vero illum nostrum error sed veritatis exercitationem corporis.</p>
+    <p>Bisous</p>
+  </div>
+
+  <div class="col-md-7">
+    <h3>Les dernières annonces mises en ligne</h3>
+      <br>
+    <!--Carousel Wrapper-->
+    <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
+  
+  <!--Slides-->
+  <div class="carousel-inner" role="listbox">
+
+        {% for post in posts %}
+        
+        {% if ( loop.index == 1 ) %}
+          <div class="carousel-item active">
+        {% else %}
+          <div class="carousel-item">
+        {% endif %}
+        <!---->
+        <div class="card border border-success">
+            <img class="card-img-top" src="https://via.placeholder.com/350x200" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <a href="{{ path('post.show', {id: post.id}) }}">{{ post.title }} </a>
+                </h5>
+              <p class="card-text">Departement : {{ post.departement }}</p>
+              <p class="card-text">Ville : {{ post.city }} ({{ post.postal }})</p>
+              <p class="card-text">{% if post.postNameType != 'Vente' %} Cette annonce est un {{ post.postNameType }} {% else %} Prix unitaire : {{ post.price }} {% endif %}</p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Posté le  : {{ post.createdAt | date('d/m/Y') }} par {{ post.user.username }}</small>
+            </div>
+          </div>
+          </div>
+        {% endfor %}
+        </div>
+        </div>
+    </div>
+  </div>
 </div>
+</div>
+
 
 {% endblock %}

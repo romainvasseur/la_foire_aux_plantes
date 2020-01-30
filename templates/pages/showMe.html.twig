@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="jumbotron text-center container">
+    <h1>Éditer mon profil</h1>
+</div>
+<div class="container bg-light rounded" style="padding: 30px;">
+    <div class="row">
+    <div class="col-md-12">
+        <h3>Bienvenue {{ user.username }}</h3>
+        {{ form_start(form) }}
+            <div class="row">
+                <div class="col-md-12">{{ form_row(form.username, {'label': 'Changer de pseudonyme', 'attr': {'placeholder': 'Votre nouveau pseudonyme (5 lettres mini)'}, 'color': 'white'}) }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">{{ form_row(form.email, {'label': 'Changer d\'Email', 'attr': {'placeholder': 'Votre nouvel Email'}}) }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">{{ form_row(form.telephone, {'label': 'Numéro de téléphone (tout attaché sinon ca marche pas, déso)', 'attr': {'placeholder': 'Ajouter mon numéro de telephone'}}) }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">{{ form_row(form.password, {'label': 'Mot de passe', 'attr': {'placeholder': 'Nouveau mot de passe'}}) }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">{{ form_row(form.confirm_password, {'label': 'Confirmation', 'attr': {'placeholder': 'Veuillez le confirmer'}}) }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <button class="btn btn-success">Mettre à jour :)</button>
+                </div>
+            </div>
+        {{ form_end(form) }}
+    </div>
+
+</div>
+</div>
+
+{% endblock %}

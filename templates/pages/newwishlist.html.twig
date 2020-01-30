@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="jumbotron text-center container">
+    <h1>Je rajoute un voeu</h1>
+</div>
+
+<div class="container bg-light rounded" style="padding: 30px;">
+    {{ form_start(form) }}
+        <div class="row">
+            <div class="col-md-12">{{ form_row(form.content, {'attr': {'placeholder': '50 caractères max'}}) }}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-1">
+                <button class="btn btn-success">Ajouter</button>
+            </div>
+        </div>
+    {{ form_end(form) }}
+</div>
+
+{% endblock %}

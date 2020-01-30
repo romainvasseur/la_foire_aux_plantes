@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="jumbotron text-center container">
+        <h1>Inscription</h1>
+    </div>
+
+    <div class="container bg-light rounded border border-success" style="padding: 30px;">
+        {{ form_start(form) }}
+            <div class="row">
+                <div class="col-md-12">{{ form_row(form.username, {'label': 'Pseudonyme', 'attr': {'placeholder': 'Les autres utilisateurs vous verrons sous ce pseudonyme (5 lettres mini)'}, 'color': 'white'}) }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">{{ form_row(form.email, {'label': 'Email', 'attr': {'placeholder': 'Il servira à vous identifier et permettra aux autres utilisateurs de vous contacter'}}) }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">{{ form_row(form.telephone, {'label': 'Numéro de téléphone', 'attr': {'placeholder': 'Il est optionel et permettra également aux autres utilisateurs de vous contacter'}}) }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">{{ form_row(form.password, {'label': 'Mot de passe', 'attr': {'placeholder': '8 lettres minimum'}}) }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">{{ form_row(form.confirm_password, {'label': 'Confirmation', 'attr': {'placeholder': 'Veuillez confirmer votre mot de passe'}}) }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <span>En cliquant sur ce bouton, vous affirmez avoir lu les <a target="blank" href="{{ path('cgu') }}">CGU</a> ainsi que les <a target="blank" href="{{ path('mentions') }}">Mentions legales</a> et les acceptez.</span>
+                    <br><br>
+                    <button class="btn btn-success">S'inscrire :)</button>
+                </div>
+            </div>
+        {{ form_end(form) }}
+    </div>
+  
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="jumbotron text-center container">
+    <h2>Bienvenue sur le profil de {{ user.username }}</h2>
+</div>
+
+<div class="container bg-light rounded" style="padding: 30px;">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="jumbotron">
+                <h3>Mes annonces :</h3>
+            </div>
+            <table class="table table-stripped">
+                <thead>
+                    <tr>
+                        <th>Titre</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   {% for post in posts %}
+                    <tr>
+                        <td><a href="{{ path('post.show', {id: post.id}) }}">{{ post.title }}</a></td>
+                        <td>{{ post.createdAt | date('d/m/Y') }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {{ knp_pagination_render(posts) }}
+        </div>
+        <div class="col-md-3">
+            <div class="jumbotron">
+                <h3>Ma wishlist :</h3>
+            </div>
+            {% for wishlist in wishlists %}
+                <a href="https://www.google.com/search?q={{ wishlist.content }}&source=lnms&tbm=isch&sa=X&ved=2ahUKEwie8ZXjtfbmAhU75uAKHSAqCtcQ_AUoBHoECBAQBg&biw=1920&bih=966"  target="_blank">{{ wishlist.content }}</a>
+                <hr>
+            {% endfor %}
+            {{ knp_pagination_render(wishlists) }}
+        </div>
+        <div class="col-md-3">
+            <div class="jumbotron">
+                <h3>Me contacter :</h3>
+            </div>
+        <h5>Email : {{ user.email }}</h5>
+        <br>
+        <hr>
+        <h5>Télephone : <br> {% if user.telephone %} {{ user.telephone }} {% else %} Je ne souhaite pas le fournir {% endif %}</h5>
+        </div>
+    </div>
+    <br>
+    <br>
+    <hr>
+    <small><a href="mailto:lafoireauxplantes.roundup@gmail.com?subject=Signalement d'un utilisateur &body=Bonjour, je souhaite signaler l' utilisateur : {{ user.username }} ({{ user.email }}) pour la ou les raisons suivantes :">Signaler l'utilisateur</a></small>
+</div>
+
+
+{% endblock %}

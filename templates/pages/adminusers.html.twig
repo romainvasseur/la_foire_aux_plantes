@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="jumbotron text-center container">
+    <h2>J'administre les utilisateurs</h2>
+</div>
+
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
+
+ <div class="container mt-4 bg-light rounded" style="padding: 30px;">
+    <div class="jumbotron">
+        <h2>Affiner ma recherche</h2>
+        {{ form_start(form) }}
+        <div class="form-row">
+            <div class="col-md-12">
+                {{ form_row(form.email) }}
+            </div>
+        </div>
+            <div>
+                <button class="btn btn-success">Rechercher</button>
+            </div>
+        
+        {{ form_end(form) }}
+    </div>
+     <table class="table table-stripped">
+         <thead>
+             <tr>
+                 <th>Username</th>
+                 <th>Mail</th>
+                 <th>Message</th>
+                 <th>Ban</th>
+             </tr>
+         </thead>
+         <tbody>
+            {% for user in users %}
+             <tr>
+                 <td>{{ user.username }}</tdstyle="color: white;">
+                 <td>{{ user.email }}</td>
+                 <td>
+                    <a href="mailto:{{ user.email }}?subject=Bannissement de votre compte &body=Bonjour {{ user.username }}, Suit aux récentes activités en désaccord avec notre politique et nos cgu, nous avons malheureusement du bannir ton compte" class="btn btn-primary">Contacter</a>
+                 </td>
+                 <td>
+                    <form method="POST" action="{{ path('admin.user.delete', {id: user.id}) }}" onsubmit="return confirm('êtes vous sûr ?')">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                        <button class="btn btn-danger">Bannir</button>
+                    </form>
+                 </td>
+             </tr>
+             {% endfor %}
+         </tbody>
+     </table>
+     {{ knp_pagination_render(users) }}
+ </div>       
+</div>
+ 
+            
+ 
+{% endblock %}

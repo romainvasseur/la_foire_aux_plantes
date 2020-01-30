@@ -12,7 +12,7 @@ class Posts
 {
 
     const CATEGORY = [
-        0 => 'Plantes',
+        8 => 'Plantes',
         1 => 'Boutures',
         2 => 'Graines',
         3 => 'Pot(s)/Cache-pot(s)',
@@ -23,14 +23,14 @@ class Posts
     ];
 
     const TYPE = [
-        0 => 'Echange',
+        4 => 'Echange',
         1 => 'Don',
         2 => 'Vente',
         3 => 'Recherche'
     ];
 
     const DEPARTEMENT = [
-        0 => 'Ain',
+        96 => 'Ain',
         1 => 'Aisne',
         2 => 'Allier',
         3 => 'Alpes-de-Haute-Provence',
@@ -125,7 +125,7 @@ class Posts
         92 => 'Hauts-de-Seine',
         93 => 'Seine-Saint-Denis',
         94 => 'Val-de-Marne',
-        95 => 'Val-d\'Oise '
+        95 => 'Val-d\'Oise'
     ];
 
     /**
@@ -161,7 +161,7 @@ class Posts
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(min=2, max=255)
-     * @Assert\Regex("/^[a-zA-Z]+$/", message="Votre nom de ville ne peut pas contenir de chiffres")
+     * @Assert\Regex("/^[a-zA-Z\-\ ]+$/", message="Votre nom de ville ne peut pas contenir de chiffres")
      */
     private $city;
 
@@ -173,7 +173,7 @@ class Posts
 
     /**
      * @ORM\Column(type="integer", options={"default": 1})
-     * @Assert\Range(min=0, max=1000)
+     * @Assert\Range(min=1, max=1000)
      */
     private $quantity;
 
@@ -191,6 +191,12 @@ class Posts
      * @ORM\Column(type="integer")
      */
     private $posttype;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="posts")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
 
     public function __construct()
     {
@@ -333,6 +339,18 @@ class Posts
     public function setPosttype(int $posttype): self
     {
         $this->posttype = $posttype;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

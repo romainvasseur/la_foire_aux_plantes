@@ -1,13 +1,83 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
-<div class="jumbotron text-center">
-    <h1>Voir toutes les annonces</h1>
+<div class="jumbotron text-center container">
+    <h2>Voir toutes les annonces</h2>
 </div>
 
 <div class="container">
-    
-</div>
+    <div class="jumbotron">
+        <h2>Affiner ma recherche</h2>
+        {{ form_start(form) }}
+        <div class="form-row">
+            <div class="col-md-12">
+                {{ form_row(form.description) }}
+            </div>
+            <div class="col-md-12">
+                {{ form_row(form.title, { 'label': false, 'attr' : { 'style': 'display:none'}}) }}
+            </div>
+            <div class="col-md-4">
+                {{ form_row(form.dpt) }}
+            </div>
+            <div class="col-md-4">
+                {{ form_row(form.category) }}
+            </div>
+            <div class="col-md-4">
+                {{ form_row(form.posttype) }}
+            </div>
+        </div>
+            <div>
+                <button class="btn btn-success">Rechercher</button>
+            </div>
+        
+        {{ form_end(form) }}
+    </div>
+    {% for post in posts %}
 
+    {% if post.postNameType == 'Echange' %}
+    <div class="card border-primary"> 
+    {% elseif post.postNameType == 'Don'%}
+    <div class="card border-success">
+    {% elseif post.postNameType == 'Vente'%}
+    <div class="card border-secondary">
+    {% else %}
+    <div class="card border-danger">
+    {% endif %}
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="https://via.placeholder.com/350x200" class="card-img" alt="...">
+                </div>
+                <div class="col-md-6">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="{{ path('post.show', {id: post.id}) }}">{{ post.title }}</a>
+                        </h5>
+                        <p class="card-text">{{ post.description  |slice(0, 180) }} ...</p>
+                        <p class="card-text">
+                            <small class="text-muted">Annonce mise en ligne le : {{ post.createdAt | date('d/m/Y') }} par {{ post.user.username }}</small>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="card-body">
+                        {% if post.postNameType != 'Vente' %}
+                            <p class="card-text">{{ post.postNameType }}</p> 
+                        {% else %}
+                            <p   class="card-text">{{ post.price }} €</p  > 
+                        {% endif %}
+                        <p class="card-text">{{ post.categoryType }}</p>
+                        <p class="card-text">{{ post.city }}</p>
+                        <p class="card-text">{{ post.postal }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+  {% endfor %}
+
+
+<div class="pagination">
+    {{ knp_pagination_render(posts) }}
+</div>
+</div>
 {% endblock %}

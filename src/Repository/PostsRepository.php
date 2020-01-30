@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Posts;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Entity\PostSearch;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Posts|null find($id, $lockMode = null, $lockVersion = null)
@@ -25,10 +26,60 @@ class PostsRepository extends ServiceEntityRepository
     public function findLatest()
     {
         return $this->createQueryBuilder('p')
-            ->orderBy('p.created_at', 'ASC')
+            ->orderBy('p.created_at', 'DESC')
             ->setMaxResults(4)
             ->getQuery()
             ->getResult();
+    }
+
+    public function findAllGood()
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.created_at', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findAllPages(PostSearch $search){
+        $query = $this->findVisibleQuery();
+
+        if ($search->getDpt()) {
+            $query = $query
+                ->andWhere('p.dpt = :dpt')
+                ->setParameter('dpt', $search->getDpt());
+        }
+
+        if ($search->getPosttype()) {
+            $query = $query
+                ->andWhere('p.posttype = :posttype')
+                ->setParameter('posttype', $search->getPosttype());
+        }
+
+        if ($search->getCategory()) {
+            $query = $query
+                ->andWhere('p.category = :category')
+                ->setParameter('category', $search->getCategory());
+        }
+
+        if ($search->getDescription()) {
+            $query = $query
+                ->andWhere('p.description LIKE :description')
+                ->setParameter('description', '%'.$search->getDescription().'%');
+        }
+
+        if ($search->getTitle()) {
+            $query = $query
+                ->andWhere('p.title LIKE :title')
+                ->setParameter('title', '%'.$search->getTitle().'%');
+        }
+
+        return $query->getQuery();
+    }
+
+    private function findVisibleQuery(){
+        return $this->createQueryBuilder('p')
+                    ->where('p.postal > 0')
+                    ->orderBy('p.created_at', 'DESC');
     }
 
     // /**

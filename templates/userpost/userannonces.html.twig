@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="jumbotron text-center container">
+    <h1>Gérer mes annonces</h1>
+</div>
+
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
+
+ <div class="container mt-4 bg-light rounded" style="padding: 30px;">
+     <table class="table table-stripped">
+         <thead>
+             <tr>
+                 <th>Titre</th>
+                 <th>Publication</th>
+                 <th>Édition</th>
+                 <th>Suppression</th>
+             </tr>
+         </thead>
+         <tbody>
+            {% for post in posts %}
+             <tr>
+                 <td>{{ post.title }}</td>
+                 <td>{{ post.createdAt | date('d/m/Y') }}</td>
+                 <td>
+                    <a href="{{ path('user.post.edit', {id: post.id}) }}" class="btn btn-primary">Éditer</a>
+                 </td>
+                 <td>
+                    <form method="POST" action="{{ path('user.post.delete', {id: post.id}) }}" onsubmit="return confirm('êtes vous sûr ?')">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ post.id) }}">
+                        <button class="btn btn-danger">Supprimer</button>
+                    </form>
+                 </td>
+             </tr>
+             {% endfor %}
+         </tbody>
+     </table>
+     {{ knp_pagination_render(posts) }}
+     <a href="{{ path('user.post.new') }}" class="btn btn-success">Nouvelle annonce</a>
+ </div>       
+</div>
+ 
+            
+ 
+{% endblock %}

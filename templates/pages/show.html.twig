@@ -2,29 +2,40 @@
 
 {% block body %}
 
-<div class="container mt-4">
+<div class="container mt-4 bg-light rounded" style="padding: 30px;">
     <div class="row">
         <div class="col-md-8">
-
+            <img src="https://via.placeholder.com/550x300" class="card-img" alt="...">
         </div>
         <div class="col-md-4">
-            <h1>{{ post.title }}</h1>
-            <h2>{{ post.dpt }}</h2>
-            <h2>{{ post.city }} ({{ post.postal }})</h2>
-            <h2>Posté dans la categorie : {{ post.categoryType }}</h2>
-            <h2>Quantité disponible : {{ post.quantity }}</h2>
-            <h2>Prix unitaire : {{ post.price }}</h2>
-            <a href="#" class="btn btn-primary">Contacter l'annonceur</a>
+            <div class="card">
+                <div class="card-header">
+                    <h2>{{ post.user.username }}</h2>
+                </div>
+                <h5>département : {{ post.departement }}</h5>
+                <h5>ville : {{ post.city }} ({{ post.postal }})</h5>
+                <h5>Téléphone : {{ post.user.telephone }}</h5>
+                <a href="{{ path('user.show.profile', {id: post.user.id}) }}" class="btn btn-success"> Voir mon profil</a>
+                <br>
+                <a href="mailto:{{ post.user.email }}?subject=échange de plantes &body=Bonjour {{ post.user.username }}, je te contacte au sujet de ton annonce : {{ post.title }}" class="btn btn-primary">{{ post.user.email }}</a>
+            </div>
         </div>
     </div>
+    <h1>{{ post.title }}</h1>
+    {% if post.postNameType != 'Vente' %}
+        <h2 style="color: green;">Cette annonce est un {{ post.postNameType }}</h2> 
+    {% else %}
+        <h2>Prix unitaire : {{ post.price }} €</h2> 
+    {% endif %}
+    <h2>Quantité disponible : {{ post.quantity }} </h2>
+    <small class="text-muted">Annonce mise en ligne le : {{ post.createdAt | date('d/m/Y') }} dans la catégorie {{ post.categoryType }}</small>
     <p>
+        <h3>Description</h3>
         {{ post.description | nl2br }}
     </p>
-    <div class="row">
-        <div class="col-md-8">
-
-        </div>
-    </div>
+    <br>
+    <hr>
+    <small class="text muted"><a href="mailto:lafoireauxplantes.roundup@gmail.com?subject=Signalement d'une annonce &body=Bonjour, je souhaite signaler l' annonce : {{ post.title }} mise en ligne par {{ post.user.email }} pour la ou les raisons suivantes :">Signaler l'annonce</a> | <a href="mailto:lafoireauxplantes.roundup@gmail.com?subject=Signalement d'un utilisateur &body=Bonjour, je souhaite signaler l' utilisateur : {{ post.user.username }} ({{ post.user.email }}) pour la ou les raisons suivantes :">Signaler l'utilisateur</a></small>
 </div>
 
 {% endblock %}

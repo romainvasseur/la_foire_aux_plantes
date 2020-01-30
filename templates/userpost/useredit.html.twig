@@ -2,17 +2,17 @@
 
 {% block body %}
 <div class="jumbotron text-center container">
-    <h1>Je crée une annonce</h1>
+    <h1>J' édite mon annonce</h1>
 </div>
 
-<div class="container mt-4 bg-light rounded" style="padding: 30px;">
+<div class="container bg-light rounded" style="padding: 30px;">
     {{ form_start(form) }}
         <div class="row">
             <div class="col-md-3">{{ form_row(form.title) }}</div>
             <div class="col-md-2">{{ form_row(form.category) }}</div>
             <div class="col-md-2">{{ form_row(form.posttype) }}</div>
             <div class="col-md-2">{{ form_row(form.price) }}</div>
-            <div class="col-md-3" >{{ form_row(form.quantity) }}</div>
+            <div class="col-md-3">{{ form_row(form.quantity) }}</div>
         </div>
         <div class="row">
             <div class="col-md-5">{{ form_row(form.dpt) }}</div>
@@ -24,7 +24,7 @@
         </div>
         <div class="row">
             <div class="col-md-1">
-                <button class="btn btn-primary">Créer</button>
+                <button class="btn btn-success">Éditer</button>
             </div>
         </div>
     {{ form_end(form) }}

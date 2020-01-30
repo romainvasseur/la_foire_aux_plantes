@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="jumbotron text-center container">
+    <h1>Gérer ma wishlist</h1>
+</div>
+
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
+
+ <div class="container mt-4 bg-light rounded" style="padding: 30px;">
+     <table class="table table-stripped">
+         <thead>
+             <tr>
+                 <th>Nom</th>
+                 <th>Suppression</th>
+             </tr>
+         </thead>
+         <tbody>
+            {% for wishlist in wishlists %}
+                <tr>
+                    <td><a href="https://www.google.com/search?q={{ wishlist.content }}&source=lnms&tbm=isch&sa=X&ved=2ahUKEwie8ZXjtfbmAhU75uAKHSAqCtcQ_AUoBHoECBAQBg&biw=1920&bih=966"  target="_blank">{{ wishlist.content }}</a></td style="color: white;">
+                    <td>
+                        <form method="POST" action="{{ path('user.wishlist.delete', {id: wishlist.id}) }}" onsubmit="return confirm('êtes vous sûr ?')">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ wishlist.id) }}">
+                            <button class="btn btn-danger">Supprimer</button>
+                        </form>
+                     </td>
+                </tr>
+             {% endfor %}
+         </tbody>
+     </table>
+     {{ knp_pagination_render(wishlists) }}
+     <a href="{{ path('user.wishlist.new') }}" class="btn btn-primary">Ajouter</a>
+ </div>       
+</div>
+ 
+            
+ 
+{% endblock %}
