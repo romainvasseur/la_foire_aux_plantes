@@ -46,7 +46,7 @@
                             Mon profil
                           </a>
                           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ path('user.show.profile', {id: app.user.id}) }}">Voir mon profil</a>
+                            <a class="dropdown-item" href="{{ path('user.myprofile', {id: app.user.id}) }}">Voir mon profil</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ path('user.edit.profile', {id: app.user.id}) }}">Éditer mon profil</a>
                             <div class="dropdown-divider"></div>
@@ -81,7 +81,7 @@
 
   <footer class="bg-dark fixed-bottom" style="background-color: grey;width: 100%;">
     <div class="container">
-      <div class="footer-copyright" style="color: white;">© Copyright 2020 La foire aux plantes | <a target="blank" href="{{ path('mentions') }}">Mentions legales</a> | <a target="blank" href="{{ path('cgu') }}">CGU</a> | <a target="blank" href="{{ path('cgv') }}">CGV</a> | <a href="{{ path('quid') }}">Qui suis-je ?</a> | <a href="mailto:lafoireauxplantes.contact@gmail.com?subject=La foire aux plantes">Me contacter</a></div>
+      <div class="footer-copyright" style="color: white;">© Copyright 2020 La foire aux plantes | <a target="blank" href="{{ path('mentions') }}">Mentions legales</a> | <a target="blank" href="{{ path('cgu') }}">CGU</a> | <a target="blank" href="{{ path('cgv') }}">CGV</a> | <a href="mailto:lafoireauxplantes.contact@gmail.com?subject=La foire aux plantes">Me contacter</a></div>
     </div>  
     </footer>
 

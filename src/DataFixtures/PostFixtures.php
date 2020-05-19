@@ -38,13 +38,13 @@ class PostFixtures extends Fixture
                 $post
                     ->setTitle($faker->sentence(6, true))
                     ->setDescription($faker->sentences(6, true))
-                    ->setDpt($faker->numberBetween(0, 95))
+                    ->setDpt($faker->numberBetween(1, 96))
                     ->setPostal('33115')
                     ->setCity($faker->city())
                     ->setPrice($faker->numberBetween(0, 200))
                     ->setQuantity($faker->numberBetween(1, 10))
-                    ->setCategory($faker->numberBetween(0, 7))
-                    ->setPosttype($faker->numberBetween(0, 3))
+                    ->setCategory($faker->numberBetween(1, 8))
+                    ->setPosttype($faker->numberBetween(1, 4))
                     ->setUser($user);
 
                 $manager->persist($post);

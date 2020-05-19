@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="jumbotron text-center container">
-    <h1>Gérer mes annonces</h1>
+<div class="container bg-light rounded flex" style="max-height: 200px;">
+    <center><img src="/uploads/images/gererAnnonces.png" alt="pas de chance" style="margin-top: -70px;"></center>
 </div>
 
 {% for message in app.flashes('success') %}
@@ -11,7 +11,14 @@
     </div>
 {% endfor %}
 
- <div class="container mt-4 bg-light rounded" style="padding: 30px;">
+<div class="card text-white bg-danger mb-3 container">
+    <div class="card-header">Attention</div>
+    <div class="card-body">
+      <p class="card-text">Ce site n'ayant pas pour but d'avoir des utilisateurs réels dans un futur proche, la publication et l'édition d'annonces sont désactivées. Merci de votre compréhension.</p>
+    </div>
+</div>
+
+ <div class="container mt-4 bg-light rounded" style="padding: 30px;margin-top: 1em;">
      <table class="table table-stripped">
          <thead>
              <tr>
@@ -27,7 +34,7 @@
                  <td>{{ post.title }}</td>
                  <td>{{ post.createdAt | date('d/m/Y') }}</td>
                  <td>
-                    <a href="{{ path('user.post.edit', {id: post.id}) }}" class="btn btn-primary">Éditer</a>
+                    {#     <a href="{{ path('user.post.edit', {id: post.id}) }}" class="btn btn-primary">Éditer</a>#}
                  </td>
                  <td>
                     <form method="POST" action="{{ path('user.post.delete', {id: post.id}) }}" onsubmit="return confirm('êtes vous sûr ?')">
@@ -41,7 +48,7 @@
          </tbody>
      </table>
      {{ knp_pagination_render(posts) }}
-     <a href="{{ path('user.post.new') }}" class="btn btn-success">Nouvelle annonce</a>
+     {#   <a href="{{ path('user.post.new') }}" class="btn btn-success">Nouvelle annonce</a>#}
  </div>       
 </div>
  

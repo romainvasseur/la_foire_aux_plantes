@@ -57,6 +57,8 @@ class User implements UserInterface,\Serializable
 
     public $confirm_password;
 
+    public $verify;
+
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Posts", mappedBy="user", orphanRemoval=true)
      */

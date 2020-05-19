@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="jumbotron text-center container">
-        <h1>Inscription</h1>
+<div class="container bg-light rounded flex" style="max-height: 200px;">
+        <center><img src="/uploads/images/inscription.png" alt="pas de chance" style="margin-top: -70px;"></center>
     </div>
 
-    <div class="container bg-light rounded border border-success" style="padding: 30px;">
+    <div class="container bg-light rounded" style="padding: 30px;margin-top: 1em;">
         {{ form_start(form) }}
             <div class="row">
                 <div class="col-md-12">{{ form_row(form.username, {'label': 'Pseudonyme', 'attr': {'placeholder': 'Les autres utilisateurs vous verrons sous ce pseudonyme (5 lettres mini)'}, 'color': 'white'}) }}</div>
@@ -23,11 +23,10 @@
                 <div class="col-md-12">{{ form_row(form.confirm_password, {'label': 'Confirmation', 'attr': {'placeholder': 'Veuillez confirmer votre mot de passe'}}) }}</div>
             </div>
             <div class="row">
-                <div class="col-md-12">
-                    <span>En cliquant sur ce bouton, vous affirmez avoir lu les <a target="blank" href="{{ path('cgu') }}">CGU</a> ainsi que les <a target="blank" href="{{ path('mentions') }}">Mentions legales</a> et les acceptez.</span>
+                        <div class="col-md-0.5">{{ form_row(form.verify, {'label': false}) }}</div>
+                        <div class="col-md-11">En cochant sur ce bouton, vous affirmez avoir lu les <a target="blank" href="{{ path('cgu') }}">CGU</a> ainsi que les <a target="blank" href="{{ path('mentions') }}">Mentions legales</a> et les acceptez.</div>
                     <br><br>
                     <button class="btn btn-success">S'inscrire :)</button>
-                </div>
             </div>
         {{ form_end(form) }}
     </div>

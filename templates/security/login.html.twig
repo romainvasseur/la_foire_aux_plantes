@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="jumbotron text-center container">
-        <h1>Connexion</h1>
+<div class="container bg-light rounded flex" style="max-height: 200px;">
+        <center><img src="/uploads/images/connexion.png" alt="pas de chance" style="margin-top: -70px;"></center>
     </div>
-    <div class="container bg-light center rounded border border-success" style="padding: 30px;margin-top: 1em;">
+    <div class="container bg-light center rounded" style="padding: 30px;margin-top: 1em;">
         {% if error %}
             <div class="alert alert-danger">
                 {{ error.messageKey }}

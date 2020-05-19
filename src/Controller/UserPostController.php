@@ -145,12 +145,24 @@ class UserPostController extends AbstractController
     }
 
     /**
-     * @Route("/profile/myprofile/o", name="user.myprofile")
+     * @Route("/profile/myprofile/{id}", name="user.myprofile")
      */
-    public function showMe(Security $security){
-        $user = $security->getUser();
-        return $this->render('pages/showMe.html.twig', [
-            'user' => $user
+    public function showMe($id, PaginatorInterface $paginator, PostsRepository $repo, Request $request, WishlistRepository $wrepo){
+        $user = $this->repoUser->find($id);
+        $posts = $paginator->paginate(
+            $this->repo->findBy(['user' => $id]),
+            $request->query->getInt('page', 1),
+            7
+        );
+        $wishlists = $paginator->paginate(
+            $this->wrepo->findBy(['user' => $id]),
+            $request->query->getInt('page', 1),
+            7
+        );
+        return $this->render('pages/showMyProfile.html.twig', [
+            'user' => $user,
+            'posts' => $posts,
+            'wishlists' => $wishlists
         ]);
     }
 

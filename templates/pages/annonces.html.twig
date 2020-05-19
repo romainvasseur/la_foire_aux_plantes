@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="jumbotron text-center container">
-    <h2>Voir toutes les annonces</h2>
+<div class="container bg-light rounded flex" style="max-height: 200px;">
+    <center><img src="/uploads/images/voirAnnonce.png" alt="pas de chance" style="margin-top: -70px;"></center>
 </div>
 
-<div class="container">
+<div class="container bg-light rounded" style="padding: 30px;margin-top: 1em;">
     <div class="jumbotron">
         <h2>Affiner ma recherche</h2>
         {{ form_start(form) }}
@@ -45,7 +45,7 @@
     {% endif %}
             <div class="row no-gutters">
                 <div class="col-md-4">
-                    <img src="https://via.placeholder.com/350x200" class="card-img" alt="...">
+                    <img src="https://picsum.photos/id/{{ random(114, 1079) }}/350/200" class="card-img" alt="Oups">
                 </div>
                 <div class="col-md-6">
                     <div class="card-body">

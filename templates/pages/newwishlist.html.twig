@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="jumbotron text-center container">
-    <h1>Je rajoute un voeu</h1>
+<div class="container bg-light rounded flex" style="max-height: 200px;">
+    <center><img src="/uploads/images/ajoutWishlist.png" alt="pas de chance" style="margin-top: -70px;"></center>
 </div>
 
-<div class="container bg-light rounded" style="padding: 30px;">
+<div class="container bg-light rounded" style="padding: 30px;margin-top: 1em;">
     {{ form_start(form) }}
         <div class="row">
             <div class="col-md-12">{{ form_row(form.content, {'attr': {'placeholder': '50 caractères max'}}) }}</div>
